@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .ET{
+        color: brown;
+    }
+    .SÜT{
+        color: darkslateblue;
+    }
+    .EKMEK{
+        color: coral;
+    }
+    .SEBZE{
+        color: chartreuse;
+    }
+    .YAĞ{
+        color: darkgreen;
+    }
+
+    th, td {
+      border: 1px solid black;
+      padding: 15px;
+      text-align: left;
+    }
+
+    input[type=checkbox] {
+      accent-color: blue;
+    }
+  </style>
+  <title>Table with Checkboxes</title>
+</head>
+<body>
+  <table>
+    <tr>
+      <th class="SÜT">SÜT</th>
+      <th class="ET">ET</th>
+      <th class="EKMEK">EKMEK</th>
+      <th class="SEBZE">SEBZE</th>
+      <th class="MEYVE">MEYVE</th>
+      <th class="YAĞ">YAĞ</th>
+    </tr>
+    <tr>
+      <td>
+        <input type="checkbox" id="s1">
+        <input type="checkbox" id="s2">
+      </td>
+      <td>
+        <input type="checkbox" id="et1">
+        <input type="checkbox" id="et2">
+        <input type="checkbox" id="et3">
+        <input type="checkbox" id="et4">
+        <input type="checkbox" id="et5">
+      </td>
+      <td>
+        <input type="checkbox" id="ek1">
+        <input type="checkbox" id="ek2">
+        <input type="checkbox" id="ek3">
+        <input type="checkbox" id="ek4">
+      </td>
+      <td>
+        <input type="checkbox" id="se1">
+        <input type="checkbox" id="se2">
+      </td>
+      <td>
+        <input type="checkbox" id="me1">
+        <input type="checkbox" id="me2">
+      </td>
+      <td>
+        <input type="checkbox" id="ya1">
+        <input type="checkbox" id="ya2">
+        <input type="checkbox" id="ya3">
+        <input type="checkbox" id="ya4">
+        <input type="checkbox" id="ya5">
+      </td>
+    </tr>
+  </table>
+
+<script>
+  // Function to reset checkboxes to unchecked
+  function resetCheckboxes() {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+      checkbox.checked = false;
+      localStorage.setItem(checkbox.id, checkbox.checked); // Save the state to local storage
+    });
+  }
+
+  // Check if it's past midnight
+  const now = new Date();
+  if (now.getHours() >= 0 && now.getHours() < 1) {
+    resetCheckboxes(); // If it's past midnight, reset checkboxes
+  } else {
+    // Get all checkboxes
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    
+    // Loop through each checkbox
+    checkboxes.forEach(checkbox => {
+      // Add click event listener to each checkbox
+      checkbox.addEventListener('click', function() {
+        // Check if the checkbox is checked
+        if (!this.checked) {
+          // If not checked, prevent it from being unchecked
+          this.checked = true;
+        }
+        // Save checkbox state to local storage
+        localStorage.setItem(this.id, this.checked);
+      });
+
+      // Check if the checkbox state is saved in local storage
+      const savedState = localStorage.getItem(checkbox.id);
+      if (savedState === "true") {
+        checkbox.checked = true;
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
